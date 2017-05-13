@@ -1,11 +1,12 @@
 import Snake from "../components/Snake.jsx"
 import {connect} from "react-redux"
-import {changeDirection,toggleMove,tick} from "../actions/index.js"
+import {changeDirection,toggleMove,tick, gameOver} from "../actions/index.js"
 
 const mapStateToProps=(state)=>{
 	return {
 		snakeArray:state.get("snakeArray"),
 		foodArray:state.get("foodArray"),
+		score:state.get("score"),
 		speed:state.get("speed"),
 		moving:state.get("moving"),
 		direction:state.get("direction"),
@@ -18,6 +19,7 @@ const mapDispatchToProps=(dispatch)=>{
         tick:()=>{dispatch(tick)},
         toggleMove:()=>{dispatch(toggleMove)},
 		changeDirection:(direction)=>{dispatch(changeDirection(direction))},
+		gameOver:()=>{dispatch(gameOver())}
 
 	}
 }

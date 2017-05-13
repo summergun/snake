@@ -1,14 +1,19 @@
-import React,{PropTypes} from "react"
+import React from "react";
+import Snake from "../containers/Snake.js";
+import {connect} from 'react-redux';
 import "./GameBoard.css"
 
 class GameBoard extends React.Component {
+	constructor(props){
+		super(props);
+	}
     render(){
 		return(
 			<div className="gameboard">
 				<h3>Snake</h3>
 				<h5>-- Summer Guan</h5>
 				<div>
-					<span>Score</span>
+					<span>Score: {this.props.score}</span>
 					<span>Speed</span>
 					<select>
 						<option value="100">Fast</option>
@@ -22,4 +27,6 @@ class GameBoard extends React.Component {
 };
 
 
-export default GameBoard;
+export default connect(
+   (state) => ({score: state.get("score")}))(GameBoard);
+

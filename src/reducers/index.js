@@ -22,6 +22,7 @@ const move = (state) => {
     let food = state.get("foodArray");
     let snakeArray = state.get("snakeArray");
     let last = snakeArray.last();
+    let score = state.get("score");
     let next;
     switch(state.get("direction")){
 		case "RIGHT":
@@ -40,8 +41,6 @@ const move = (state) => {
 			break;
 	}
     if(is(next,food)){
-        console.log(snakeArray);
-        
         return  state.update("snakeArray", list=>list.push(next))
                 .update("score", score=>score+1)
                 .set("foodArray", Map(foodPosition(snakeArray)))
@@ -82,6 +81,9 @@ const game = (state = initialState,action)=>{
 
          case "TICK":
         return move(state);
+
+        case "GAMEOVER":
+        return state.set("gameover",true);
 
         
         default:
