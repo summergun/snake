@@ -1,0 +1,22 @@
+.gameboard{
+	width:400px;
+	position:absolute;
+	color:#fff;
+	left:0;
+	top:-70px;
+	font-family:Arial "Microsoft Yahei" ;
+}
+
+.gameboard h3{
+	margin-bottom:10px;
+}
+
+.gameboard span{
+	color:#ddd;
+	font-size:20px;
+	margin-right:15px;
+}
+
+.gameboard select{
+	margin-right:15px;
+}
