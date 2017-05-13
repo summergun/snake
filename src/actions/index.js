@@ -14,9 +14,15 @@ export const moveForward= () => ({
 export const tick = () => ({
     type:"TICK"
 });
+export const changeSpeed = (speed) => ({
+    type:"CHANGE_SPEED",
+    speed
+});
 
 export const gameOver=()=>({
     type:"GAMEOVER"
-}
+});
 
-)
+export const reStart = () => ({
+    type:"RESTART"
+});

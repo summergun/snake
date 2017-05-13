@@ -1,7 +1,7 @@
 import React, {PropTypes} from "react";
 import './Grid.css';
 import {connect} from 'react-redux';
-import {tick} from '../actions';
+import {tick,toggleMove} from '../actions';
 import {bindActionCreators} from 'redux';
 import './Snake.css';
 import Snake from "../containers/Snake.js"
@@ -12,12 +12,19 @@ class Grid extends React.Component {
     }
 
     componentWillMount() {
-        this.interval = setInterval(this.props.tick, 500);
+        this.tick();
     }
 
     componentWillUnmount() {
-        clearInterval(this.interval);
+        clearTimeout(this.timeout);
     }
+
+    tick = () => {
+        if (this.props.moving) {
+            this.props.tick();
+            this.timeout = setTimeout(this.tick, this.props.speed);
+        }
+    };
 
     render() {
         const {cols, rows, snakeArray,foodArray} = this.props;
@@ -42,6 +49,6 @@ class Grid extends React.Component {
 
 export default connect(
    (state) => ({rows: state.get("rows"), cols: state.get("cols"), snakeArray:state.get("snakeArray"),
-    foodArray:state.get("foodArray")}),
-    dispatch => ({...bindActionCreators({tick}, dispatch)})
+    foodArray:state.get("foodArray"), speed: state.get('speed'), moving: state.get('moving')}),
+    dispatch => ({...bindActionCreators({tick,toggleMove}, dispatch)})
 )(Grid);

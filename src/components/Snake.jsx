@@ -31,6 +31,18 @@ class Snake extends React.Component {
 						this.props.changeDirection("DOWN")
 				}
 				break;
+			// case 80:
+			// 	if(!this.props.gameover){
+			// 		if(this.props.moving){
+			// 			this.props.toggleMove();
+			// 			clearInterval(this.timer)
+			// 		}
+			// 		else {
+			// 			this.props.toggleMove();
+			// 			this.timer=setInterval(this.props.move,this.props.speed)
+			// 		}
+			// 	}
+			// 	break;
             default:
             break;
         }

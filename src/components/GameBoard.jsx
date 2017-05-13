@@ -2,6 +2,8 @@ import React from "react";
 import Snake from "../containers/Snake.js";
 import {connect} from 'react-redux';
 import "./GameBoard.css"
+import {bindActionCreators} from 'redux';
+import {changeSpeed} from '../actions';
 
 class GameBoard extends React.Component {
 	constructor(props){
@@ -14,11 +16,11 @@ class GameBoard extends React.Component {
 				<h5>-- Summer Guan</h5>
 				<div>
 					<span>Score: {this.props.score}</span>
-					<span>Speed</span>
-					<select>
+					<span>Speed: {this.props.speed}</span>
+					<select value={this.props.speed} onChange={e => this.props.changeSpeed(e.target.value)}>
 						<option value="100">Fast</option>
 						<option value="200">Medium</option>
-						<option value="300">Slow</option>
+						<option value="1000">Slow</option>
 					</select>
 				</div>
 			</div>
@@ -28,5 +30,7 @@ class GameBoard extends React.Component {
 
 
 export default connect(
-   (state) => ({score: state.get("score")}))(GameBoard);
+   (state) => ({score: state.get("score"),speed:state.get("speed")}),
+   dispatch => ({ ...bindActionCreators({changeSpeed}, dispatch) })
+)(GameBoard);
 
