@@ -12,7 +12,7 @@ class Grid extends React.Component {
     }
 
     componentWillMount() {
-        this.interval = setInterval(this.props.tick, 1000);
+        this.interval = setInterval(this.props.tick, 500);
     }
 
     componentWillUnmount() {
@@ -20,8 +20,9 @@ class Grid extends React.Component {
     }
 
     render() {
-        const {cols, rows, snakeArray} = this.props;
+        const {cols, rows, snakeArray,foodArray} = this.props;
         let gridArray =[];
+        let foodStyle = {left:foodArray.get("x")*20, top:foodArray.get("y")*20};
 
         for (let y = 0; y < rows; ++y) {
             for (let x = 0; x < cols; ++x) {
@@ -29,16 +30,18 @@ class Grid extends React.Component {
                 gridArray.push(<span className={`cell ${hasSnakeDot ? 'snake-body' : ''}`} key={`${y},${x}`}></span>)
             }
         }
-        console.log("hello", rows, cols);
+    
         return (
             <div className = "grid">
-                 {gridArray}
+                 {gridArray} 
+                 <span className="snake-food" style={foodStyle}></span>
                 </div>
         )
     }
 }
 
 export default connect(
-   (state) => ({rows: state.get("rows"), cols: state.get("cols"), snakeArray:state.get("snakeArray")}),
+   (state) => ({rows: state.get("rows"), cols: state.get("cols"), snakeArray:state.get("snakeArray"),
+    foodArray:state.get("foodArray")}),
     dispatch => ({...bindActionCreators({tick}, dispatch)})
 )(Grid);

@@ -14,3 +14,7 @@ export const moveForward= () => ({
 export const tick = () => ({
     type:"TICK"
 });
+
+export const changeFood=()=>({
+    type:"CHANGE_FOOD"
+});

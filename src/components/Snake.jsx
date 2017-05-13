@@ -39,8 +39,23 @@ class Snake extends React.Component {
     componentDidMount(){
         window.addEventListener("keydown", this.handleKey, true);
     }
+
+	shouldComponentUpdate(nextProps,nextState) {
+		let snakeArray = nextProps.snakeArray;
+		let snakeBody = snakeArray.slice(0,-1);
+		let head = snakeArray.last();
+		return true;
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener("keydown",this.handleKeyDown);
+		if(this.timer!==undefined){
+			clearInterval(this.timer);
+		}
+		
+	}
         render(){ 
-			console.log(this.props.snakeArray)
+			
 			return (
             <div className="snake" >
 				<Grid cols={20} rows={20} />
@@ -49,6 +64,7 @@ class Snake extends React.Component {
 						<span className="snake-body" key={pos.get("x")+"-"+pos.get("y")} style={{left:pos.get("x")*20,top:pos.get("y")*20}}></span>
 						))}
 				</div>
+				
 			</div>
 			)
 

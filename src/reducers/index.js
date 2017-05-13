@@ -39,15 +39,36 @@ const move = (state) => {
 		default:
 			break;
 	}
+    if(is(next,food)){
+        console.log(snakeArray);
+        
+        return  state.update("snakeArray", list=>list.push(next))
+                .update("score", score=>score+1)
+                .set("foodArray", Map(foodPosition(snakeArray)))
+                
+        
+    }
+    else {
     return state.get("direction")?state.update("snakeArray", list=>list.skip(1).push(next)):state;
+    }
 };
 
-// const move = (state) =>{
-//     let snakeArray = [ ...state.snakeArray];
-//     const newDot = moveSnakeDot(snakeArray[0], state.direction);
-//     const nextSnakeArray = [newDot, ...snakeArray.slice(0, snakeArray.length - 1)];
-//     return { ...state, snakeArray: nextSnakeArray };
-// }
+
+// check if x, y are the same position
+
+const checkArray = (arr,x,y) =>{
+    arr.filter(item => {return item.x===x&&item.y===y}).length>0?true:false;
+}
+
+const foodPosition = (snakeArray) => {
+    let x=Math.floor(Math.random()*20);
+    let y=Math.floor(Math.random()*20);
+    while(checkArray(snakeArray,x,y)){
+        x=Math.floor(Math.random()*20);
+        y=Math.floor(Math.random()*20);
+    }
+    return {x,y}
+}
 
 
 
@@ -56,9 +77,8 @@ const game = (state = initialState,action)=>{
         case "TOGGLE_MOVE":
         return state.update("moving", m=>!m);
 
-        case "CHANGE_DIRECTION":{
+        case "CHANGE_DIRECTION":
         return state.set("direction",action.direction);
-    }
 
          case "TICK":
         return move(state);

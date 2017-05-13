@@ -15,8 +15,8 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps=(dispatch)=>{
 	return {
-        toggleMove:()=>{dispatch(toggleMove)},
         tick:()=>{dispatch(tick)},
+        toggleMove:()=>{dispatch(toggleMove)},
 		changeDirection:(direction)=>{dispatch(changeDirection(direction))},
 
 	}
