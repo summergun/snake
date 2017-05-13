@@ -1,6 +1,7 @@
 import React from "react";
 import GameBoard from "./GameBoard.jsx"
 import Grid from "./Grid.jsx"
+import Snake from '../containers/Snake.js'
 
 
 const App=()=>{
@@ -8,7 +9,7 @@ const App=()=>{
 		<div className="app">
 			<h3>Hello</h3>
             <GameBoard />
-            <Grid />
+            <Snake />
 		</div>
 	)
 	

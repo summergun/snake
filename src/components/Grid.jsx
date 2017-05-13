@@ -3,6 +3,8 @@ import './Grid.css';
 import {connect} from 'react-redux';
 import {tick} from '../actions';
 import {bindActionCreators} from 'redux';
+import './Snake.css';
+import Snake from "../containers/Snake.js"
 
 class Grid extends React.Component {
     constructor (props){
@@ -24,18 +26,19 @@ class Grid extends React.Component {
         for (let y = 0; y < rows; ++y) {
             for (let x = 0; x < cols; ++x) {
                 const hasSnakeDot = snakeArray.find(dot => (dot.x === x && dot.y === y));
-                gridArray.push(<span className={`cell ${hasSnakeDot ? 'active' : ''}`} key={`${y},${x}`}></span>)
+                gridArray.push(<span className={`cell ${hasSnakeDot ? 'snake-body' : ''}`} key={`${y},${x}`}></span>)
             }
         }
+        console.log("hello", rows, cols);
         return (
             <div className = "grid">
-                {gridArray}
+                 {gridArray}
                 </div>
         )
     }
 }
 
 export default connect(
-    ({cols, rows, snakeArray}) => ({ cols, rows, snakeArray}),
+   (state) => ({rows: state.get("rows"), cols: state.get("cols"), snakeArray:state.get("snakeArray")}),
     dispatch => ({...bindActionCreators({tick}, dispatch)})
 )(Grid);

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import Grid from './Grid';
-import "./snake.css";
+import "./Snake.css";
 
 class Snake extends React.Component {
     constructor(props) {
@@ -9,8 +9,7 @@ class Snake extends React.Component {
     }
 
     handleKey (e) {
-		console.log("this is handlekey");
-		debugger;
+		console.log("this is handlekey",this.props.moving, this.props.direction);
         switch(e.keyCode){
 			case 37:
 				if(this.props.direction!="RIGHT"&&this.props.moving){
@@ -38,10 +37,11 @@ class Snake extends React.Component {
     }
     
     componentDidMount(){
-		console.log("componentDidMount")
-        window.addEventListener("keyDown", this.handleKey, true);
+        window.addEventListener("keydown", this.handleKey, true);
     }
-        render(){
+        render(){ 
+			console.log(this.props.snakeArray)
+			return (
             <div className="snake" >
 				<Grid cols={20} rows={20} />
 				<div>
@@ -50,6 +50,7 @@ class Snake extends React.Component {
 						))}
 				</div>
 			</div>
+			)
 
         }
     }
