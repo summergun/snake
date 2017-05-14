@@ -15,15 +15,20 @@ class Grid extends React.Component {
         this.tick();
     }
 
+
     componentWillUnmount() {
-        clearTimeout(this.timeout);
+        this.timeout = null;
+        clearTimeout(this.timer);
     }
+
 
     tick = () => {
         if (this.props.moving) {
             this.props.tick();
-            this.timeout = setTimeout(this.tick, this.props.speed);
+            if(!this.timer)
+            this.timer = setInterval(this.tick, this.props.speed);
         }
+
     };
 
     render() {

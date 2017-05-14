@@ -11,7 +11,7 @@ export const initialState = fromJS ({
     score:0,
     rows: 20,
     cols: 20,
-    gameover:false
+    gameover:false,
 })
 
 
@@ -19,6 +19,7 @@ export const initialState = fromJS ({
 //set will 
 
 const move = (state) => {
+   
     let food = state.get("foodArray");
     let snakeArray = state.get("snakeArray");
     let last = snakeArray.last();
@@ -55,7 +56,8 @@ const move = (state) => {
     }
     else {
     return state.get("direction")?state.update("snakeArray", list=>list.skip(1).push(next)):state;
-    }
+}
+    
 };
 
 
@@ -80,6 +82,7 @@ const game = (state = initialState,action)=>{
 
         case "CHANGE_DIRECTION":
         return state.set("direction",action.direction);
+        
         case "CHANGE_SPEED":
         return state.set("speed",action.speed);
 
@@ -89,6 +92,7 @@ const game = (state = initialState,action)=>{
 
          case "RESTART":
          return state.merge(initialState);
+         //.merge(initialState);
 
         case "GAMEOVER":
         return state.set("gameover",true);
