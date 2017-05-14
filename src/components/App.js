@@ -6,8 +6,7 @@ import Snake from '../containers/Snake.js'
 
 const App=()=>{
 	return (
-		<div className="app">
-			<h3>Hello</h3>
+		<div className="app">>
             <GameBoard />
             <Snake />
 		</div>
