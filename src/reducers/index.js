@@ -16,7 +16,7 @@ export const initialState = fromJS ({
 
 
 //get the value from the list
-//set 
+//set will 
 
 const move = (state) => {
     let food = state.get("foodArray");
@@ -42,11 +42,11 @@ const move = (state) => {
 	}
 
     if (next.get('x') >= state.get('cols') || next.get('x') < 0 || next.get('y') >= state.get('rows') || next.get('y') < 0) {
-        return state.update('moving', false);
+        return state.set('moving', false);
     }
     
     if (checkArray(state.get('snakeArray'), next.get('x'), next.get('y'))) {
-        return state.update('moving', false);
+        return state.set('moving', false);
     }
     if(is(next,food)){
         return  state.update("snakeArray", list=>list.push(next))
@@ -86,6 +86,9 @@ const game = (state = initialState,action)=>{
          case "TICK":
          if (state.get("moving")) return move(state);
          else return state;
+
+         case "RESTART":
+         return state.merge(initialState);
 
         case "GAMEOVER":
         return state.set("gameover",true);

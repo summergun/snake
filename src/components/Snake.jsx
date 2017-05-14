@@ -1,4 +1,7 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {reStart} from '../actions';
+import {bindActionCreators} from 'redux';
 import Grid from './Grid';
 import "./Snake.css";
 
@@ -31,18 +34,12 @@ class Snake extends React.Component {
 						this.props.changeDirection("DOWN")
 				}
 				break;
-			// case 80:
-			// 	if(!this.props.gameover){
-			// 		if(this.props.moving){
-			// 			this.props.toggleMove();
-			// 			clearInterval(this.timer)
-			// 		}
-			// 		else {
-			// 			this.props.toggleMove();
-			// 			this.timer=setInterval(this.props.move,this.props.speed)
-			// 		}
-			// 	}
-			// 	break;
+			case 82:
+			if(this.timer){
+				clearInterval(this.timer);
+			}
+			this.props.reStart();
+			break;
             default:
             break;
         }
@@ -83,6 +80,17 @@ class Snake extends React.Component {
         }
     }
 
-    export default Snake;
+    // export default Snake;
+
+// 	export default connect(
+//    (state) => ({reStart: state.get('reStart')),
+//     dispatch => ({...bindActionCreators({tick,toggleMove}, dispatch)})
+// )(Grid);
+
+
+export default connect(
+   (state) => ({reStart: state.get("reStart")}),
+    dispatch => ({...bindActionCreators({reStart}, dispatch)})
+)(Snake);
 
 
