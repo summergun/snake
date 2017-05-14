@@ -9,26 +9,27 @@ import Snake from "../containers/Snake.js"
 class Grid extends React.Component {
     constructor (props){
         super (props)
+        //speed doesnt change when props speed is updated
+        this.timer = setInterval(this.tick, this.props.speed);
     }
-
-    componentWillMount() {
-        this.tick();
-    }
-
 
     componentWillUnmount() {
-        this.timeout = null;
-        clearTimeout(this.timer);
+        this.timer = null;
+        clearInterval(this.timer);
     }
 
+    componentWillReceiveProps(nextProps) {
+        //Check if the speed has changed
+        if(this.props.speed !== nextProps.speed){
+            clearInterval(this.timer);
+            this.timer = setInterval(this.tick, nextProps.speed);
+        }
+    }
 
     tick = () => {
         if (this.props.moving) {
             this.props.tick();
-            if(!this.timer)
-            this.timer = setInterval(this.tick, this.props.speed);
         }
-
     };
 
     render() {
@@ -47,6 +48,7 @@ class Grid extends React.Component {
             <div className = "grid">
                  {gridArray} 
                  <span className="snake-food" style={foodStyle}></span>
+                 {/*<button onClick={()=> this.props.reStart()}>Restart</button>*/}
                 </div>
         )
     }
@@ -57,3 +59,4 @@ export default connect(
     foodArray:state.get("foodArray"), speed: state.get('speed'), moving: state.get('moving')}),
     dispatch => ({...bindActionCreators({tick,toggleMove}, dispatch)})
 )(Grid);
+

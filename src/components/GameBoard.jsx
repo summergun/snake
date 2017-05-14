@@ -20,7 +20,7 @@ class GameBoard extends React.Component {
 					<select value={this.props.speed} onChange={e => this.props.changeSpeed(e.target.value)}>
 						<option value="100">Fast</option>
 						<option value="200">Medium</option>
-						<option value="300">Slow</option>
+						<option value="800">Slow</option>
 					</select>
 				</div>
 			</div>
