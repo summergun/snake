@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/snake-react/static/css/main.d1da0a31.css",
+    "main.js": "/snake-react/static/js/main.689a6d2a.js",
+    "index.html": "/snake-react/index.html",
+    "main.d1da0a31.css.map": "/snake-react/static/css/main.d1da0a31.css.map",
+    "main.689a6d2a.js.map": "/snake-react/static/js/main.689a6d2a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1da0a31.css",
+    "static/js/main.689a6d2a.js"
+  ]
+}
